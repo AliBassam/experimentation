@@ -29,13 +29,9 @@ public class ReviewRepository {
     }
 
     public List<Review> findByBookId(Long bookId) {
-        List<Review> result = new ArrayList<>();
-        for (Review review : reviews.values()) {
-            if (review.getBookId() != null && review.getBookId().equals(bookId)) {
-                result.add(review);
-            }
-        }
-        return result;
+        return reviews.values().stream()
+                .filter(review -> review.getBookId() != null && review.getBookId().equals(bookId))
+                .toList();
     }
 
     public void deleteById(Long id) {

@@ -29,13 +29,9 @@ public class BookRepository {
     }
 
     public List<Book> findByAuthorId(Long authorId) {
-        List<Book> result = new ArrayList<>();
-        for (Book book : books.values()) {
-            if (book.getAuthorId() != null && book.getAuthorId().equals(authorId)) {
-                result.add(book);
-            }
-        }
-        return result;
+        return books.values().stream()
+                .filter(book -> book.getAuthorId() != null && book.getAuthorId().equals(authorId))
+                .toList();
     }
 
     public void deleteById(Long id) {
